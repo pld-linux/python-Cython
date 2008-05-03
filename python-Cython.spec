@@ -21,13 +21,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Cython lets you write code that mixes Python and C data types any way
-you want, and compiles it into a C extension for Python.
-Cython is based on PyRex.
+you want, and compiles it into a C extension for Python. Cython is
+based on Pyrex.
 
 %description -l pl.UTF-8
 Pyrex pozwala pisać kod zawierający dane Pythona i języka C połączone
 w jakikolwiek sposób i kompiluje to jako rozszerzenie C dla Pythona.
-Cython jest oparty na PyReksie.
+Cython jest oparty na Pyreksie.
 
 %package examples
 Summary:	Examples for Pyrex language
