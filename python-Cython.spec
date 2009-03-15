@@ -4,12 +4,12 @@
 Summary:	Language for writing Python Extension Modules
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona
 Name:		python-%{module}
-Version:	0.9.6.14
+Version:	0.10.3
 Release:	1
 License:	PSF
 Group:		Libraries/Python
 Source0:	http://www.cython.org/%{module}-%{version}.tar.gz
-# Source0-md5:	3fd3a8baa2deb0155ed8b37ee320d02b
+# Source0-md5:	684103ed37472d9beef3a38e0d5c431d
 URL:		http://www.cython.org/
 BuildRequires:	python >= 1:2.5
 BuildRequires:	rpm-pythonprov
@@ -53,7 +53,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 	--install-purelib=%{py_sitescriptdir} \
 	-O2
 
-find $RPM_BUILD_ROOT%{py_sitescriptdir} -name "*.py" -a ! -name 'Lexicon.py' -exec rm -f {} \;
+find $RPM_BUILD_ROOT%{py_sitedir} -name "*.py" -a ! -name 'Lexicon.py' -exec rm -f {} \;
 
 cp -a Demos/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
@@ -63,9 +63,10 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.txt ToDo.txt USAGE.txt Doc/*.html Doc/*.c
-%attr(755,root,root) %{_bindir}/*
-%{py_sitescriptdir}/Cython
-%{py_sitescriptdir}/Cython-*.egg-info
+%attr(755,root,root) %{_bindir}/cython
+%{py_sitedir}/Cython
+%{py_sitedir}/pyximport
+%{py_sitedir}/Cython-*.egg-info
 
 %files examples
 %defattr(644,root,root,755)
