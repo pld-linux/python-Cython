@@ -12,6 +12,7 @@ Source0:	http://www.cython.org/release/%{module}-%{version}.tar.gz
 # Source0-md5:	cf9f98e982258f8516620277975016f3
 URL:		http://www.cython.org/
 BuildRequires:	python >= 1:2.5
+BuildRequires:	python-devel
 BuildRequires:	rpm-pythonprov
 %pyrequires_eq	python-libs
 %pyrequires_eq	python-devel
