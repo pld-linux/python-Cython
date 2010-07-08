@@ -5,7 +5,7 @@ Summary:	Language for writing Python Extension Modules
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona
 Name:		python-%{module}
 Version:	0.12.1
-Release:	1
+Release:	2
 License:	PSF
 Group:		Libraries/Python
 Source0:	http://www.cython.org/release/%{module}-%{version}.tar.gz
