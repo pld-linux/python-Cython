@@ -4,12 +4,12 @@
 Summary:	Language for writing Python Extension Modules
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona
 Name:		python-%{module}
-Version:	0.12.1
-Release:	2
+Version:	0.14
+Release:	1
 License:	PSF
 Group:		Libraries/Python
 Source0:	http://www.cython.org/release/%{module}-%{version}.tar.gz
-# Source0-md5:	cf9f98e982258f8516620277975016f3
+# Source0-md5:	27fa072e8282431864543e008fd9a19b
 URL:		http://www.cython.org/
 BuildRequires:	python >= 1:2.5
 BuildRequires:	python-devel
@@ -65,6 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.txt ToDo.txt USAGE.txt Doc/*.html Doc/*.c
 %attr(755,root,root) %{_bindir}/cython
+%attr(755,root,root) %{_bindir}/cygdb
 %{py_sitedir}/cython.py[co]
 %{py_sitedir}/Cython
 %{py_sitedir}/pyximport
