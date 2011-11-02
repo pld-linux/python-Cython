@@ -4,12 +4,12 @@
 Summary:	Language for writing Python Extension Modules
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona
 Name:		python-%{module}
-Version:	0.14
+Version:	0.15.1
 Release:	1
-License:	PSF
+License:	Apache v2.0
 Group:		Libraries/Python
 Source0:	http://www.cython.org/release/%{module}-%{version}.tar.gz
-# Source0-md5:	27fa072e8282431864543e008fd9a19b
+# Source0-md5:	171021b3845c9ca8bd6d8185b3cde664
 URL:		http://www.cython.org/
 BuildRequires:	python >= 1:2.5
 BuildRequires:	python-devel
@@ -26,21 +26,21 @@ you want, and compiles it into a C extension for Python. Cython is
 based on Pyrex.
 
 %description -l pl.UTF-8
-Pyrex pozwala pisać kod zawierający dane Pythona i języka C połączone
+Cython pozwala pisać kod zawierający dane Pythona i języka C połączone
 w jakikolwiek sposób i kompiluje to jako rozszerzenie C dla Pythona.
 Cython jest oparty na Pyreksie.
 
 %package examples
-Summary:	Examples for Pyrex language
-Summary(pl.UTF-8):	Przykłady programów w języku Pyrex
+Summary:	Examples for Cython language
+Summary(pl.UTF-8):	Przykłady programów w języku Cython
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 
 %description examples
-This package contains example programs for Pyrex language.
+This package contains example programs for Cython language.
 
 %description examples -l pl.UTF-8
-Pakiet zawierający przykładowe programy napisane w języku Pyrex.
+Pakiet zawierający przykładowe programy napisane w języku Cython.
 
 %prep
 %setup -q -n %{module}-%{version}
@@ -63,7 +63,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.txt ToDo.txt USAGE.txt Doc/*.html Doc/*.c
+%doc COPYING.txt README.txt ToDo.txt USAGE.txt Doc/*.html Doc/*.c
 %attr(755,root,root) %{_bindir}/cython
 %attr(755,root,root) %{_bindir}/cygdb
 %{py_sitedir}/cython.py[co]
