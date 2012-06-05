@@ -4,12 +4,12 @@
 Summary:	Language for writing Python Extension Modules
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona
 Name:		python-%{module}
-Version:	0.15.1
+Version:	0.16
 Release:	1
 License:	Apache v2.0
 Group:		Libraries/Python
 Source0:	http://www.cython.org/release/%{module}-%{version}.tar.gz
-# Source0-md5:	171021b3845c9ca8bd6d8185b3cde664
+# Source0-md5:	7934186ada3552110aba92062fa88b1c
 URL:		http://www.cython.org/
 BuildRequires:	python >= 1:2.5
 BuildRequires:	python-devel
