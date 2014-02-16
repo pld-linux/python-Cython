@@ -45,6 +45,11 @@ Pakiet zawierający przykładowe programy napisane w języku Cython.
 %prep
 %setup -q -n %{module}-%{version}
 
+%build
+CC="%{__cc}" \
+CFLAGS="%{rpmcflags}" \
+%{__python} setup.py build
+
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
