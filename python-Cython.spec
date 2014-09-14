@@ -8,26 +8,26 @@
 Summary:	Language for writing Python Extension Modules (Python 2.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 2.x)
 Name:		python-%{module}
-Version:	0.20.1
+Version:	0.21
 Release:	1
 License:	Apache v2.0
 Group:		Libraries/Python
 Source0:	http://www.cython.org/release/%{module}-%{version}.tar.gz
-# Source0-md5:	52431696c64e618036537c4d9aa79d99
+# Source0-md5:	6c9c4d19ba485fe8cd88e23b57ac7886
 URL:		http://www.cython.org/
 %if %{with python2}
-BuildRequires:	python >= 1:2.5
-BuildRequires:	python-devel
+BuildRequires:	python >= 1:2.6
+BuildRequires:	python-devel >= 1:2.6
 %endif
 %if %{with python3}
-BuildRequires:	python3
-BuildRequires:	python3-2to3
-BuildRequires:	python3-devel
+BuildRequires:	python3 >= 1:3.2
+BuildRequires:	python3-2to3 >= 1:3.2
+BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-distribute
-BuildRequires:	python3-modules
+BuildRequires:	python3-modules >= 1:3.2
 %endif
 BuildRequires:	rpm-pythonprov
-Requires:	python-devel
+Requires:	python-devel >= 1:2.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautocompressdoc	*.c
@@ -50,7 +50,7 @@ Ten pakiet zawiera moduł Cython dla Pythona 2.x.
 Summary:	Language for writing Python Extension Modules (Python 3.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 3.x)
 Group:		Libraries/Python
-Requires:	python3-devel
+Requires:	python3-devel >= 1:3.2
 
 %description -n python3-Cython
 Cython lets you write code that mixes Python and C data types any way
@@ -110,6 +110,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 		--root=$RPM_BUILD_ROOT
 
 %{__mv} $RPM_BUILD_ROOT%{_bindir}/cython{,3}
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/cythonize{,3}
 %{__mv} $RPM_BUILD_ROOT%{_bindir}/cygdb{,3}
 %endif
 
@@ -135,6 +136,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc COPYING.txt README.txt ToDo.txt USAGE.txt Doc/*.html Doc/*.c
 %attr(755,root,root) %{_bindir}/cython
+%attr(755,root,root) %{_bindir}/cythonize
 %attr(755,root,root) %{_bindir}/cygdb
 %{py_sitedir}/cython.py[co]
 %{py_sitedir}/Cython
@@ -147,6 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc COPYING.txt README.txt ToDo.txt USAGE.txt Doc/*.html Doc/*.c
 %attr(755,root,root) %{_bindir}/cython3
+%attr(755,root,root) %{_bindir}/cythonize3
 %attr(755,root,root) %{_bindir}/cygdb3
 %{py3_sitedir}/cython.py
 %{py3_sitedir}/__pycache__/cython.*
