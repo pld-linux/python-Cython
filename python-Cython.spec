@@ -8,23 +8,24 @@
 Summary:	Language for writing Python Extension Modules (Python 2.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 2.x)
 Name:		python-%{module}
-Version:	0.22
-Release:	2
+Version:	0.22.1
+Release:	1
 License:	Apache v2.0
 Group:		Libraries/Python
 Source0:	http://cython.org/release/%{module}-%{version}.tar.gz
-# Source0-md5:	1ae25add4ef7b63ee9b4af697300d6b6
+# Source0-md5:	b920f3c81ae767477a342807bf5e68e8
 URL:		http://cython.org/
 %if %{with python2}
 BuildRequires:	python >= 1:2.6
 BuildRequires:	python-devel >= 1:2.6
+BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
 BuildRequires:	python3 >= 1:3.2
 BuildRequires:	python3-2to3 >= 1:3.2
 BuildRequires:	python3-devel >= 1:3.2
-BuildRequires:	python3-distribute
 BuildRequires:	python3-modules >= 1:3.2
+BuildRequires:	python3-setuptools
 %endif
 BuildRequires:	rpm-pythonprov
 Requires:	python-devel >= 1:2.6
