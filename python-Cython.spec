@@ -84,16 +84,12 @@ Pakiet zawierający przykładowe programy napisane w języku Cython.
 
 %build
 %if %{with python2}
-CC="%{__cc}" \
-CFLAGS="%{rpmcflags}" \
-%{__python} setup.py build \
+%py_build \
 	--build-base build-2
 %endif
 
 %if %{with python3}
-CC="%{__cc}" \
-CFLAGS="%{rpmcflags}" \
-%{__python3} setup.py build \
+%py3_build \
 	--build-base build-3
 %endif
 
