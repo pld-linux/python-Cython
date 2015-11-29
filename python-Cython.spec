@@ -15,6 +15,7 @@ Group:		Libraries/Python
 Source0:	http://cython.org/release/%{module}-%{version}.tar.gz
 # Source0-md5:	157df1f69bcec6b56fd97e0f2e057f6e
 URL:		http://cython.org/
+BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
 BuildRequires:	python >= 1:2.6
 BuildRequires:	python-devel >= 1:2.6
