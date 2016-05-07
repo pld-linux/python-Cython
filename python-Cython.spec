@@ -9,7 +9,7 @@ Summary:	Language for writing Python Extension Modules (Python 2.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 2.x)
 Name:		python-%{module}
 Version:	0.23.4
-Release:	2
+Release:	3
 License:	Apache v2.0
 Group:		Libraries/Python
 Source0:	http://cython.org/release/%{module}-%{version}.tar.gz
@@ -85,13 +85,11 @@ Pakiet zawierający przykładowe programy napisane w języku Cython.
 
 %build
 %if %{with python2}
-%py_build \
-	--build-base build-2
+%py_build
 %endif
 
 %if %{with python3}
-%py3_build \
-	--build-base build-3
+%py3_build
 %endif
 
 %install
@@ -99,13 +97,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %if %{with python3}
-%{__python3} setup.py \
-	build \
-		--build-base build-3 \
-	install \
-		--optimize=2 \
-		--skip-build \
-		--root=$RPM_BUILD_ROOT
+%py3_install
 
 %{__mv} $RPM_BUILD_ROOT%{_bindir}/cython{,3}
 %{__mv} $RPM_BUILD_ROOT%{_bindir}/cythonize{,3}
@@ -113,13 +105,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 %endif
 
 %if %{with python2}
-%{__python} setup.py \
-	build \
-		--build-base build-2 \
-	install \
-		--optimize=2 \
-		--skip-build \
-		--root=$RPM_BUILD_ROOT
+%py_install
 
 find $RPM_BUILD_ROOT%{py_sitedir} -name "*.py" -a ! -name 'Lexicon.py' -exec rm -f {} \;
 %endif
