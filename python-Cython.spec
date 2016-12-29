@@ -8,13 +8,13 @@
 Summary:	Language for writing Python Extension Modules (Python 2.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 2.x)
 Name:		python-%{module}
-Version:	0.24.1
-Release:	2
+Version:	0.25.2
+Release:	1
 License:	Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/simple/cython/
-Source0:	https://pypi.python.org/packages/c6/fe/97319581905de40f1be7015a0ea1bd336a756f6249914b148a17eefa75dc/%{module}-%{version}.tar.gz
-# Source0-md5:	890b494a12951f1d6228c416a5789554
+Source0:	https://pypi.python.org/packages/b7/67/7e2a817f9e9c773ee3995c1e15204f5d01c8da71882016cac10342ef031b/%{module}-%{version}.tar.gz
+# Source0-md5:	642c81285e1bb833b14ab3f439964086
 URL:		http://cython.org/
 BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
