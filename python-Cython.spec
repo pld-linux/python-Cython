@@ -2,19 +2,20 @@
 # Conditional build:
 %bcond_without	python2		# CPython 2.x module
 %bcond_without	python3		# CPython 3.x module
+%bcond_without	apidocs		# Sphinx documentation
 
 %define		module	Cython
 
 Summary:	Language for writing Python Extension Modules (Python 2.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 2.x)
 Name:		python-%{module}
-Version:	0.25.2
+Version:	0.27.3
 Release:	1
 License:	Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/simple/cython/
-Source0:	https://pypi.python.org/packages/b7/67/7e2a817f9e9c773ee3995c1e15204f5d01c8da71882016cac10342ef031b/%{module}-%{version}.tar.gz
-# Source0-md5:	642c81285e1bb833b14ab3f439964086
+Source0:	https://files.pythonhosted.org/packages/source/c/cython/%{module}-%{version}.tar.gz
+# Source0-md5:	6149238287d662bd5d5e572482252493
 URL:		http://cython.org/
 BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
@@ -30,6 +31,7 @@ BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools
 %endif
 BuildRequires:	rpm-pythonprov
+%{?with_apidocs:BuildRequires:	sphinx-pdg}
 Requires:	python-devel >= 1:2.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -69,6 +71,17 @@ Cython jest oparty na Pyreksie.
 
 Ten pakiet zawiera moduł Cython dla Pythona 3.x.
 
+%package apidocs
+Summary:	API documentation for Cython module
+Summary(pl.UTF-8):	Dokumentacja API modułu Cython
+Group:		Documentation
+
+%description apidocs
+API documentation for Cython module.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API modułu Cython.
+
 %package examples
 Summary:	Examples for Cython language
 Summary(pl.UTF-8):	Przykłady programów w języku Cython
@@ -91,6 +104,10 @@ Pakiet zawierający przykładowe programy napisane w języku Cython.
 
 %if %{with python3}
 %py3_build
+%endif
+
+%if %{with apidocs}
+%{__make} -C docs html
 %endif
 
 %install
@@ -119,7 +136,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc COPYING.txt README.txt ToDo.txt USAGE.txt Doc/*.html Doc/*.c
+%doc COPYING.txt README.txt ToDo.txt USAGE.txt
 %attr(755,root,root) %{_bindir}/cython
 %attr(755,root,root) %{_bindir}/cythonize
 %attr(755,root,root) %{_bindir}/cygdb
@@ -132,7 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-Cython
 %defattr(644,root,root,755)
-%doc COPYING.txt README.txt ToDo.txt USAGE.txt Doc/*.html Doc/*.c
+%doc COPYING.txt README.txt ToDo.txt USAGE.txt
 %attr(755,root,root) %{_bindir}/cython3
 %attr(755,root,root) %{_bindir}/cythonize3
 %attr(755,root,root) %{_bindir}/cygdb3
@@ -141,6 +158,12 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitedir}/Cython
 %{py3_sitedir}/pyximport
 %{py3_sitedir}/Cython-%{version}-py*.egg-info
+%endif
+
+%if %{with apidocs}
+%files apidocs
+%defattr(644,root,root,755)
+%doc docs/build/html/{_images,_static,src,*.html,*.js}
 %endif
 
 %files examples
