@@ -9,13 +9,13 @@
 Summary:	Language for writing Python Extension Modules (Python 2.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 2.x)
 Name:		python-%{module}
-Version:	0.27.3
-Release:	2
+Version:	0.28.2
+Release:	1
 License:	Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/simple/cython/
 Source0:	https://files.pythonhosted.org/packages/source/c/cython/%{module}-%{version}.tar.gz
-# Source0-md5:	6149238287d662bd5d5e572482252493
+# Source0-md5:	0e0568d6bed4b09ad01afe0a38805305
 URL:		http://cython.org/
 BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
@@ -136,7 +136,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc COPYING.txt README.txt ToDo.txt USAGE.txt
+%doc COPYING.txt README.rst ToDo.txt USAGE.txt
 %attr(755,root,root) %{_bindir}/cython
 %attr(755,root,root) %{_bindir}/cythonize
 %attr(755,root,root) %{_bindir}/cygdb
@@ -149,7 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-Cython
 %defattr(644,root,root,755)
-%doc COPYING.txt README.txt ToDo.txt USAGE.txt
+%doc COPYING.txt README.rst ToDo.txt USAGE.txt
 %attr(755,root,root) %{_bindir}/cython3
 %attr(755,root,root) %{_bindir}/cythonize3
 %attr(755,root,root) %{_bindir}/cygdb3
