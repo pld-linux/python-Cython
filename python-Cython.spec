@@ -3,19 +3,20 @@
 %bcond_without	python2		# CPython 2.x module
 %bcond_without	python3		# CPython 3.x module
 %bcond_without	apidocs		# Sphinx documentation
+%bcond_with	tests		# test suite (SLOOOOW)
 
 %define		module	Cython
 
 Summary:	Language for writing Python Extension Modules (Python 2.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 2.x)
 Name:		python-%{module}
-Version:	0.28.2
+Version:	0.28.4
 Release:	1
 License:	Apache v2.0
 Group:		Libraries/Python
-#Source0Download: https://pypi.python.org/simple/cython/
+#Source0Download: https://pypi.org/simple/cython/
 Source0:	https://files.pythonhosted.org/packages/source/c/cython/%{module}-%{version}.tar.gz
-# Source0-md5:	0e0568d6bed4b09ad01afe0a38805305
+# Source0-md5:	fa01ba71b1e3136b0f12e3ed8958ea02
 URL:		http://cython.org/
 BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
@@ -24,10 +25,8 @@ BuildRequires:	python-devel >= 1:2.6
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
-BuildRequires:	python3 >= 1:3.2
-BuildRequires:	python3-2to3 >= 1:3.2
-BuildRequires:	python3-devel >= 1:3.2
-BuildRequires:	python3-modules >= 1:3.2
+BuildRequires:	python3 >= 1:3.3
+BuildRequires:	python3-devel >= 1:3.3
 BuildRequires:	python3-setuptools
 %endif
 BuildRequires:	rpm-pythonprov
@@ -55,7 +54,7 @@ Ten pakiet zawiera moduł Cython dla Pythona 2.x.
 Summary:	Language for writing Python Extension Modules (Python 3.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 3.x)
 Group:		Libraries/Python
-Requires:	python3-devel >= 1:3.2
+Requires:	python3-devel >= 1:3.3
 
 %description -n python3-Cython
 Cython lets you write code that mixes Python and C data types any way
@@ -100,10 +99,18 @@ Pakiet zawierający przykładowe programy napisane w języku Cython.
 %build
 %if %{with python2}
 %py_build
+
+%if %{with tests}
+%{__python} runtests.py
+%endif
 %endif
 
 %if %{with python3}
 %py3_build
+
+%if %{with tests}
+%{__python3} runtests.py
+%endif
 %endif
 
 %if %{with apidocs}
@@ -136,7 +143,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc COPYING.txt README.rst ToDo.txt USAGE.txt
+%doc CHANGES.rst COPYING.txt README.rst ToDo.txt USAGE.txt
 %attr(755,root,root) %{_bindir}/cython
 %attr(755,root,root) %{_bindir}/cythonize
 %attr(755,root,root) %{_bindir}/cygdb
@@ -149,7 +156,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-Cython
 %defattr(644,root,root,755)
-%doc COPYING.txt README.rst ToDo.txt USAGE.txt
+%doc CHANGES.rst COPYING.txt README.rst ToDo.txt USAGE.txt
 %attr(755,root,root) %{_bindir}/cython3
 %attr(755,root,root) %{_bindir}/cythonize3
 %attr(755,root,root) %{_bindir}/cygdb3
