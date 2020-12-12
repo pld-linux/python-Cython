@@ -10,13 +10,14 @@
 Summary:	Language for writing Python Extension Modules (Python 2.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 2.x)
 Name:		python-%{module}
-Version:	0.29.14
+Version:	0.29.21
 Release:	1
 License:	Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/cython/
 Source0:	https://files.pythonhosted.org/packages/source/c/cython/%{module}-%{version}.tar.gz
-# Source0-md5:	6e2f139e30bb08d68366f9370d87964c
+# Source0-md5:	12c5e45af71dcc6dff28cdcbcbef6f39
+Patch0:		%{name}-sphinx.patch
 URL:		http://cython.org/
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
@@ -30,7 +31,7 @@ BuildRequires:	python3-devel >= 1:3.3
 BuildRequires:	python3-setuptools
 %endif
 BuildRequires:	rpm-pythonprov
-%{?with_apidocs:BuildRequires:	sphinx-pdg}
+%{?with_apidocs:BuildRequires:	sphinx-pdg-3 >= 1.8}
 Requires:	python-devel >= 1:2.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -95,6 +96,7 @@ Pakiet zawierający przykładowe programy napisane w języku Cython.
 
 %prep
 %setup -q -n %{module}-%{version}
+%patch0 -p1
 
 %build
 %if %{with python2}
@@ -109,7 +111,8 @@ Pakiet zawierający przykładowe programy napisane w języku Cython.
 %py3_build
 
 %if %{with tests}
-%{__python3} runtests.py
+%{__python3} runtests.py \
+	SPHINXBUILD=sphinx-build-3
 %endif
 %endif
 
