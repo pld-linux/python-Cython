@@ -1,0 +1,28 @@
+From 039ef7c6242b3b6a18363ff22ead04f4e7cce676 Mon Sep 17 00:00:00 2001
+From: Stefan Behnel <stefan_ml@behnel.de>
+Date: Fri, 14 Jul 2023 21:46:56 +0200
+Subject: [PATCH] In Py2, the extension type might get cleaned up before the
+ objects at system exit, so we need an extra NULL check for the type pointer.
+
+---
+ Cython/Compiler/ModuleNode.py | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/Cython/Compiler/ModuleNode.py b/Cython/Compiler/ModuleNode.py
+index f98a0c15054..bf2cc63e1e1 100644
+--- a/Cython/Compiler/ModuleNode.py
++++ b/Cython/Compiler/ModuleNode.py
+@@ -1509,7 +1509,13 @@ class ModuleNode(Nodes.Node, Nodes.Block
+                 if base_type.scope and base_type.scope.needs_gc():
+                     code.putln("PyObject_GC_Track(o);")
+                 else:
++                    code.putln("#if PY_MAJOR_VERSION < 3")
++                    # Py2 lacks guarantees that the type pointer is still valid if we dealloc the object
++                    # at system exit time.  Thus, we need an extra NULL check.
++                    code.putln("if (!(%s) || PyType_IS_GC(%s)) PyObject_GC_Track(o);" % (base_cname, base_cname))
++                    code.putln("#else")
+                     code.putln("if (PyType_IS_GC(%s)) PyObject_GC_Track(o);" % base_cname)
++                    code.putln("#endif")
+ 
+             tp_dealloc = TypeSlots.get_base_slot_function(scope, tp_slot)
+             if tp_dealloc is not None:
