@@ -11,7 +11,7 @@ Summary:	Language for writing Python Extension Modules (Python 2.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 2.x)
 Name:		python-%{module}
 Version:	3.0.11
-Release:	2
+Release:	3
 License:	Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/cython/
@@ -30,7 +30,11 @@ BuildRequires:	python3-devel >= 1:3.3
 BuildRequires:	python3-setuptools
 %endif
 BuildRequires:	rpm-pythonprov
-%{?with_apidocs:BuildRequires:	sphinx-pdg-3 >= 1.8}
+%if %{with apidocs}
+BuildRequires:	python3-sphinx_issues
+BuildRequires:	python3-sphinx_tabs
+BuildRequires:	sphinx-pdg-3 >= 1.8
+%endif
 Requires:	python-devel >= 1:2.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -97,20 +101,20 @@ Pakiet zawierający przykładowe programy napisane w języku Cython.
 %setup -q -n cython-%{version}
 
 %build
-%if %{with python2}
-%py_build
-
-%if %{with tests}
-%{__python} runtests.py
-%endif
-%endif
-
 %if %{with python3}
 %py3_build
 
 %if %{with tests}
 %{__python3} runtests.py \
 	SPHINXBUILD=sphinx-build-3
+%endif
+%endif
+
+%if %{with python2}
+%py_build
+
+%if %{with tests}
+%{__python} runtests.py
 %endif
 %endif
 
@@ -122,18 +126,18 @@ Pakiet zawierający przykładowe programy napisane w języku Cython.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-%if %{with python3}
-%py3_install
-
-%{__mv} $RPM_BUILD_ROOT%{_bindir}/cython{,3}
-%{__mv} $RPM_BUILD_ROOT%{_bindir}/cythonize{,3}
-%{__mv} $RPM_BUILD_ROOT%{_bindir}/cygdb{,3}
-%endif
-
 %if %{with python2}
 %py_install
 
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/cython{,2}
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/cythonize{,2}
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/cygdb{,2}
+
 find $RPM_BUILD_ROOT%{py_sitedir} -name "*.py" -a ! -name 'Lexicon.py' -exec rm -f {} \;
+%endif
+
+%if %{with python3}
+%py3_install
 %endif
 
 cp -a Demos/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -145,9 +149,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGES.rst COPYING.txt README.rst ToDo.txt USAGE.txt
-%attr(755,root,root) %{_bindir}/cython
-%attr(755,root,root) %{_bindir}/cythonize
-%attr(755,root,root) %{_bindir}/cygdb
+%attr(755,root,root) %{_bindir}/cython2
+%attr(755,root,root) %{_bindir}/cythonize2
+%attr(755,root,root) %{_bindir}/cygdb2
 %{py_sitedir}/cython.py[co]
 %{py_sitedir}/Cython
 %{py_sitedir}/pyximport
@@ -158,9 +162,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python3-Cython
 %defattr(644,root,root,755)
 %doc CHANGES.rst COPYING.txt README.rst ToDo.txt USAGE.txt
-%attr(755,root,root) %{_bindir}/cython3
-%attr(755,root,root) %{_bindir}/cythonize3
-%attr(755,root,root) %{_bindir}/cygdb3
+%attr(755,root,root) %{_bindir}/cython
+%attr(755,root,root) %{_bindir}/cythonize
+%attr(755,root,root) %{_bindir}/cygdb
 %{py3_sitedir}/cython.py
 %{py3_sitedir}/__pycache__/cython.*
 %{py3_sitedir}/Cython
