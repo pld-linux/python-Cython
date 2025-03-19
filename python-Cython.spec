@@ -11,7 +11,7 @@ Summary:	Language for writing Python Extension Modules (Python 2.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 2.x)
 Name:		python-%{module}
 Version:	3.0.11
-Release:	4
+Release:	5
 License:	Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/cython/
@@ -138,6 +138,14 @@ find $RPM_BUILD_ROOT%{py_sitedir} -name "*.py" -a ! -name 'Lexicon.py' -exec rm 
 
 %if %{with python3}
 %py3_install
+
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/cython{,3}
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/cythonize{,3}
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/cygdb{,3}
+
+%{__ln_s} cython3 $RPM_BUILD_ROOT%{_bindir}/cython
+%{__ln_s} cythonize3 $RPM_BUILD_ROOT%{_bindir}/cythonize
+%{__ln_s} cygdb3 $RPM_BUILD_ROOT%{_bindir}/cygdb
 %endif
 
 cp -a Demos/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -163,8 +171,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES.rst COPYING.txt README.rst ToDo.txt USAGE.txt
 %attr(755,root,root) %{_bindir}/cython
+%attr(755,root,root) %{_bindir}/cython3
 %attr(755,root,root) %{_bindir}/cythonize
+%attr(755,root,root) %{_bindir}/cythonize3
 %attr(755,root,root) %{_bindir}/cygdb
+%attr(755,root,root) %{_bindir}/cygdb3
 %{py3_sitedir}/cython.py
 %{py3_sitedir}/__pycache__/cython.*
 %{py3_sitedir}/Cython
