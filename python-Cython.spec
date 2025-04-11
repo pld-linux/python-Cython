@@ -11,7 +11,7 @@ Summary:	Language for writing Python Extension Modules (Python 2.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 2.x)
 Name:		python-%{module}
 Version:	3.0.12
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/cython/
@@ -59,6 +59,7 @@ Summary:	Language for writing Python Extension Modules (Python 3.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 3.x)
 Group:		Libraries/Python
 Requires:	python3-devel >= 1:3.3
+Conflicts:	python-Cython < 3.0.11-3
 
 %description -n python3-Cython
 Cython lets you write code that mixes Python and C data types any way
