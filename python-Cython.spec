@@ -18,6 +18,7 @@ Group:		Libraries/Python
 Source0:	https://pypi.debian.net/cython/cython-%{version}.tar.gz
 # Source0-md5:	ab61fac00686d611197fba10c37f30e5
 URL:		https://cython.org/
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
 BuildRequires:	python >= 1:2.6
@@ -79,6 +80,7 @@ Ten pakiet zawiera moduł Cython dla Pythona 3.x.
 Summary:	API documentation for Cython module
 Summary(pl.UTF-8):	Dokumentacja API modułu Cython
 Group:		Documentation
+BuildArch:	noarch
 
 %description apidocs
 API documentation for Cython module.
@@ -91,6 +93,7 @@ Summary:	Examples for Cython language
 Summary(pl.UTF-8):	Przykłady programów w języku Cython
 Group:		Libraries/Python
 Obsoletes:	python3-Cython-examples < 0.20.1
+BuildArch:	noarch
 
 %description examples
 This package contains example programs for Cython language.
