@@ -21,13 +21,13 @@ URL:		https://cython.org/
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
-BuildRequires:	python >= 1:2.6
-BuildRequires:	python-devel >= 1:2.6
+BuildRequires:	python >= 1:2.7
+BuildRequires:	python-devel >= 1:2.7
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
-BuildRequires:	python3 >= 1:3.3
-BuildRequires:	python3-devel >= 1:3.3
+BuildRequires:	python3 >= 1:3.4
+BuildRequires:	python3-devel >= 1:3.4
 BuildRequires:	python3-setuptools
 %endif
 BuildRequires:	rpm-pythonprov
@@ -36,7 +36,7 @@ BuildRequires:	python3-sphinx_issues
 BuildRequires:	python3-sphinx_tabs
 BuildRequires:	sphinx-pdg-3 >= 1.8
 %endif
-Requires:	python-devel >= 1:2.6
+Requires:	python-devel >= 1:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautocompressdoc	*.c
@@ -59,7 +59,7 @@ Ten pakiet zawiera moduł Cython dla Pythona 2.x.
 Summary:	Language for writing Python Extension Modules (Python 3.x version)
 Summary(pl.UTF-8):	Język służący do pisania modułów rozszerzających Pythona (wersja dla Pythona 3.x)
 Group:		Libraries/Python
-Requires:	python3-devel >= 1:3.3
+Requires:	python3-devel >= 1:3.4
 Conflicts:	python-Cython < 3.0.11-3
 
 %description -n python3-Cython
